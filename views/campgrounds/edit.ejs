@@ -1,0 +1,47 @@
+<% layout('/layouts/boilerplate') %>
+    <div class="row">
+        <h1 class="text-center">Edit Campground</h1>
+        <div class="col-md-6 offset-md-3">
+            <form class="my-4 needs-validation" action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST" enctype="multipart/form-data" novalidate>
+                <div class="mb-3">
+                    <label class="form-label" for="title">Update Title:</label>
+                    <input class="form-control" type="text" id="title" name="campground[title]" value="<%= campground.title %>" required>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please provide a valid title.</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="location">Update Location:</label>
+                    <input class="form-control" type="text" id="location" name="campground[location]" value="<%= campground.location %>" required>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please provide a valid location.</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="description">Update Description:</label>
+                    <textarea class="form-control" rows="3" id="description" name="campground[description]"><%= campground.description %></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="image">Upload more image(s):</label>
+                    <input class="form-control form-control-sm" id="image" name="image" type="file" multiple onchange="showFileNames(this)">
+                    <ul id="file-list" class="mt-2 small text-muted"></ul>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="price">Update Price:</label>
+                    <div class="input-group">
+                        <span class="input-group-text">Rs. </span>
+                        <input class="form-control" type="number" min="0" placeholder="<%= campground.price %>" id="price" name="campground[price]" required>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please provide a valid price.</div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <% campground.images.forEach(function(img, i) { %>
+                       <img class="image-thumbnail" src="<%= img.thumbnail %>" alt="">
+                       <div class="form-check-inline"><input type="checkbox" id="image-<%=i%>"  name="deleteImages[]" value="<%= img.filename %>"></input></div>
+                       <label for="image-<%=i%>">Delete</label>
+                    <% }) %>
+                </div>
+                <button class="btn btn-success" type="submit">Update Campground</button>
+            </form>
+            <a class="btn btn-danger" href="/campgrounds/<%= campground._id %>">Cancel</a>
+        </div>
+    </div>

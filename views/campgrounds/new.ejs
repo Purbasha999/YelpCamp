@@ -1,0 +1,40 @@
+<% layout('/layouts/boilerplate') %>
+    <div class="row">
+        <h1 class="text-center">New Campground</h1>
+        <div class="col-md-6 offset-md-3">
+            <form class="my-4 needs-validation" action="/campgrounds" method="POST" enctype="multipart/form-data" novalidate>
+                <div class="mb-3">
+                    <label class="form-label" for="title">Enter Title</label>
+                    <input class="form-control" type="text" id="title" name="campground[title]" required>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please enter a valid title.</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="location">Enter Location:</label>
+                    <input class="form-control" type="text" id="location" name="campground[location]" required>
+                    <div class="valid-feedback">Looks good!</div>
+                    <div class="invalid-feedback">Please enter a valid location.</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="description">Enter Description:</label>
+                    <textarea class="form-control" rows="3" id="description" name="campground[description]"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="image">Upload image(s):</label>
+                    <input class="form-control form-control-sm" id="image" name="image" type="file" multiple onchange="showFileNames(this)">
+                    <ul id="file-list" class="mt-2 small text-muted"></ul>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="price">Enter Price:</label>
+                    <div class="input-group has-validation">
+                        <span class="input-group-text">Rs. </span>
+                        <input class="form-control" type="number" min="0" placeholder="0" id="price" name="campground[price]" required>
+                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Please enter a valid price.</div>
+                    </div>
+                </div>
+                <button class="btn btn-success" type="submit">Create Campground</button>
+            </form>
+            <a class="btn btn-primary" href="/campgrounds">Cancel</a>
+        </div>
+    </div>
